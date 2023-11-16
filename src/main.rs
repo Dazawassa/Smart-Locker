@@ -4,22 +4,21 @@
 use std::{error::Error, process, io::{self, Write}};
 mod encrypt;
 use encrypt::encrypt_text;
-// This is hoe we colour the text to scare the hackewrs away.
+mod pass_check;
+use pass_check::check_passkey;
+mod selections;
+use selections::selections_private_pull;
+// This is how we colour the text to scare the hackers away.
 // To quote TechRules, my faveourite YouTuber who hasn't uploaded in 2 years.
 // This makes no practical sense. "Haha I have scared the hacker!" What's that going to do?
 use colored::Colorize;
 
 fn main() {
     // For some reason those brackets are needed for the colour.
-<<<<<<< Updated upstream
-    print!("{}", "Hold on! Are you meant to be here?".red());
-    print!("Enter your Passkey.");
-    // We should be disabling echo for password entering but how this is done depends on if you are running Windows or Linux.
-=======
     print!("{}", "Hold on! Are you meant to be here?\n".red());
     print!("Enter your Passkey.\n");
->>>>>>> Stashed changes
     // Get user to input passkey.
+    // Can't bother to do this for the moment but we should declare how many bits this passkey has for memory efficiency.
     let mut passkey_p = String::new();
     io::stdout().flush().unwrap(); // flush it to the screen
     std::io::stdin().read_line(&mut passkey_p).unwrap();
@@ -28,9 +27,6 @@ fn main() {
     // Drop passkey_p to avoid it being pulled from memory.
     // Unlike Python Rust does not have an easy way to just kill a value in memory. The best we can so is drop it. And wait for the compiler to kill it.
     let _ = &passkey_p;
-<<<<<<< Updated upstream
-    encrypt_text(&passkey);
-=======
     // This should be fine because the original value is dropped after this is ran.
     // Remember. Trying to beat the compiler isn't possible. But that doesn't mean we shouldn't.
     // Oh yea. What this is doing. Forgot about that one.
@@ -58,5 +54,4 @@ fn main() {
             // Handle error case
         }
     }
->>>>>>> Stashed changes
 }
