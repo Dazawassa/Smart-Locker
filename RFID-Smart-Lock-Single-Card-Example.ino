@@ -13,8 +13,7 @@
 
 MFRC522 rfid(SS_PIN, RST_PIN);
 
-byte FirstTagUID[4] = {0xFF, 0xFF, 0xFF, 0xFF}; // change the FFs to the RFID card UID data
-byte SecondTagUID[4] = {0xFF, 0xFF, 0xFF, 0xFF}; // change the FFs to the RFID card UID data
+byte RFIDTagUID[4] = {0xFF, 0xFF, 0xFF, 0xFF}; // change the FFs to the RFID card UID data
 
 void setup() {
   Serial.begin(9600);
@@ -31,21 +30,11 @@ void loop() {
     if (rfid.PICC_ReadCardSerial()) { // NUID has been read
       MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
 
-      if (rfid.uid.uidByte[0] == FirstTagUID[0] &&
-          rfid.uid.uidByte[1] == FirstTagUID[1] &&
-          rfid.uid.uidByte[2] == FirstTagUID[2] &&
-          rfid.uid.uidByte[3] == FirstTagUID[3] ) {
+      if (rfid.uid.uidByte[0] == RFIDTagUID[0] &&
+          rfid.uid.uidByte[1] == RFIDTagUID[1] &&
+          rfid.uid.uidByte[2] == RFIDTagUID[2] &&
+          rfid.uid.uidByte[3] == RFIDTagUID[3] ) {
         Serial.println("Access is granted for first card");
-        digitalWrite(RELAY_PIN, HIGH);  // unlock the door for 5 seconds
-        delay(5000);
-        digitalWrite(RELAY_PIN, LOW); // lock the door
-      }
-      else
-      if (rfid.uid.uidByte[0] == SecondTagUID[0] &&
-          rfid.uid.uidByte[1] == SecondTagUID[1] &&
-          rfid.uid.uidByte[2] == SecondTagUID[2] &&
-          rfid.uid.uidByte[3] == SecondTagUID[3] ) {
-        Serial.println("Access is granted for second card");
         digitalWrite(RELAY_PIN, HIGH);  // unlock the door for 5 seconds
         delay(5000);
         digitalWrite(RELAY_PIN, LOW); // lock the door
