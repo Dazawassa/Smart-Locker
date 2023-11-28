@@ -30,7 +30,7 @@ fn main() {
     // This should be fine because the original value is dropped after this is ran.
     // Remember. Trying to beat the compiler isn't possible. But that doesn't mean we shouldn't.
     // Oh yea. What this is doing. Forgot about that one.
-    // This calls a fuinction from the encryption model that eventuially will be used to encrypt our text. We then pass the encrypted text into the passkey_encrypted value here.
+    // This calls a function from the encryption model that eventuially will be used to encrypt our text. We then pass the encrypted text into the passkey_encrypted value here.
     let passkey_encrypted = encrypt_text(&passkey);
     // Drop passkey to avoid it being pulled from memory.
     let _ = &passkey;
