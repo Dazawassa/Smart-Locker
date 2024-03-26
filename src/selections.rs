@@ -8,9 +8,7 @@ pub fn selections_private_pull(){
 // This function we actually want.
 fn selections_main(){
     print!("Welcome to the RFID cloning program!\n");
-    // Sorry Adam guess you can break infinite loops. But you can't break my heart.
     loop {
-        // Greeting the user and then aksing for our input.
         // We should store statistics for each of these functions. Then we could write an R program which can generate bar graphs and pie charts.
         print!("Please select which service would be required\n Generate - Genrate a new RFID value to be flashed.\n Restore - Restore an old value onto a card\n Admin - Flash admin value that can access any locker\n Format - Reset code on a locker\n Quit - Exit the program\n");
         let mut choice = String::new();
@@ -22,7 +20,6 @@ fn selections_main(){
         let choice = choice.to_lowercase();
         let choice = choice.trim(); // remove trailing newline
         // I know processing the users input in a sperate function is slower. But if we intend to use a GUI later on this will make that easier.
-        // We are passing choice as a pointer. Pointers do not exist in Python but are very common in C. Learn pointers else you will suffer the pain of a thousand suns.
         user_selection(&choice);
     }
 }
