@@ -3,7 +3,7 @@ use std::fs::File;
 use csv::Reader;
 
 pub fn check_passkey(passkey_encrypted: &str) -> Result<bool, Box<dyn Error>> {
-    let password_list = "src/accounts/passwords.csv"; // Replace this with your file path
+    let password_list = "src/accounts/passwords.csv";
     let password_matched = password_read(password_list, passkey_encrypted)?;
     
     Ok(password_matched)

@@ -1,4 +1,7 @@
 use std::io::{self, Write};
+mod card_write;
+use card_write::write_card;
+
 
 // This function exists for security reasons. It obfuscates data transfer in practise and avoids attacks that work from public values.
 pub fn selections_private_pull(){
@@ -27,7 +30,20 @@ fn selections_main(){
 fn user_selection(choice: &str) {
     match choice {
         "quit" | "exit" => std::process::exit(0),
-        "generate" => print!("This is the generate function.\n"),
+        "generate" => {
+            print!("Enter the locker ID");
+            let mut locker_id = String::new();
+            io::stdout().flush().unwrap(); // flush it to the screen
+            std::io::stdin().read_line(&mut locker_id).unwrap();
+            // Above code is a little messy. We are just pulling an input
+            // This is where we pass our ID.
+            let card_id = write_card(&locker_id);
+            // Assuming you might want to do something with `card_id` here
+            match card_id {
+                Ok(id) => println!("Card generated with ID: {}", id),
+                Err(e) => println!("Failed to generate card: {}", e),
+            }
+        },
         _ => println!("Please enter a valid choice for this program."),
     }
 }
